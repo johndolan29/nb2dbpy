@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "nb2dbpy"
+version = "0.0.2"
+description = "This package manages the conversion between .ipynb (Jupyter Notebook) and .py (Python script) files, which Databricks automatically performs when exporting notebooks."
+authors = ["John Dolan <johndolan29@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.scripts]
+nb2dbpy = "nb2dbpy.nb2dbpy:main"
+
+[tool.poetry.help]
+nb2dbpy = "A tool to convert between .ipynb and .py files for Databricks notebooks."
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.urls]
+repository = "https://github.com/johndolan29/nb2dbpy"
+issues = "https://github.com/johndolan29/nb2dbpy/issues"

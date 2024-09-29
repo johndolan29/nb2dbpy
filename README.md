@@ -1,45 +1,81 @@
-![alt text](./example/yoydyne_data_science_logo.png "Yoydyne Data Science")
+# nb2dbpy
+A command-line tool for converting between Databricks .py script files and .ipynb notebooks. This tool was build in collaboration with 
+[Yoyodyne-Data-Science](https://github.com/Yoyodyne-Data-Science), thank you for setting the foundations for this tool.
 
-# ipynb-py-convert-databricks
+## Overview
+When working with Databricks, notebooks are often exported as .py files for easier version control and collaboration. However, these scripts may not be ideal for local development in VS Code. nb2dbpy bridges this gap by enabling seamless conversion between Databricks-formatted Python scripts and Jupyter notebooks directly from the command line.
 
-Function for un- and re- doing the conversion from .ipynb ipython notebook to .py python file which Databricks performs every time it exports a notebook. Building on code from [kiwi0fruit/ipynb-py-convert](https://github.com/kiwi0fruit/ipynb-py-convert)
+## Features
+- **Bidirectional Conversion**: Convert from .py scripts to .ipynb notebooks and vice versa.
+- **Command-Line Interface**: Perform conversions easily without writing additional code.
+- **Databricks Compatibility**: Handles Databricks-specific syntax and comments.
+- **Preserves Cell Structure**: Maintains code and markdown cells accurately during conversion.
 
-## Why?
+## Installation
+Clone the repository and install the required dependencies:
 
-Databricks exports `.ipynb` files (e.g. when version controlling) as `.py`, which is pretty handy as it's easier to deal with a straight up python script file than a JSON formatted IPython notebook. However, it would be nice to perform the reverse operation, e.g. when we download a databricks notebook and want to run it in a local anaconda notebook.
+```
+pip install nb2dbpy
+```
 
-## How?
+## Usage
+Use nb2dbpy from the command line to perform conversions.
 
-Conversion is possible both ways; from the `.py` version made by databricks to an IPython notebook:
+#### Converting from .py to .ipynb
+To convert a Databricks-exported Python script to a Jupyter notebook:
 
-`convert_databricks_nb('databricks_nb.py', 'databricks_nb.ipynb')`
+```
+nb2dbpy your_python_script.py
+```
 
-And from an IPython notebook to a `.py` file (i.e. a function presumably similar to the one Databricks itself runs before exporting notebooks):
+This command will generate your_python_script.ipynb in the same directory.
 
-`convert_databricks_nb('databricks_nb.ipynb','databricks_nb.py')`
+#### Converting from .ipynb to .py
+To convert a Jupyter notebook into a Databricks-compatible Python script:
 
-## Example
+```
+nb2dbpy your_notebook.ipynb
+```
+This will create your_notebook.py, ready for import into Databricks.
 
-Let's say we write the following notebook in databricks:
-<p align="center">
-  <img width="900" src="example/example_databricks_notebook.PNG">
-</p>
+#### Specifying Output Files
+You can specify a custom output file name using the -o or --output option:
 
-On, exporting, databricks will convert it to a 	`.py` file which looks like this:
-<p align="center">
-  <img width="400" src="example/example_databricks_notebook_dbconversion.PNG">
-</p>
+```
+nb2dbpy input_file.py -o custom_output.ipynb
+```
 
-Although this is a perfectly functioning `.py` script, it's lost the IPython notebook formatting of the original databricks notebook.
+#### Overwriting Existing Files
+If the output file already exists, the tool will prompt you before overwriting:
 
-By running: 
+```
+Warning: File <output file> already exists.
+Do you want to overwrite it? (y/n):
+Enter y to overwrite or n to cancel the operation.
+```
 
-`convert_databricks_nb('example_databricks_notebook.py', 'example_databricks_notebook_conv.ipynb')`
+## Examples
+#### Example 1: Converting a Databricks Script to a Notebook
+Suppose you have a file analysis.py exported from Databricks. To convert it to a Jupyter notebook:
 
-we convert this file to an IPython notebook which looks like this:
-<p align="center">
-  <img width="900" src="example/example_databricks_notebook_conv.PNG">
-</p>
+```
+nb2dbpy analysis.py
+```
+Open analysis.ipynb with VS Code to continue your work locally.
 
-Notice that all magic commands (except for markdown) remain commented out.
+#### Example 2: Converting a Notebook for Databricks
+You have developed a notebook experiment.ipynb and now want to run it in Databricks:
 
+```
+nb2dbpy experiment.ipynb
+```
+Upload the resulting experiment.py to your Databricks workspace.
+
+## Limitations
+- Advanced notebook features like interactive widgets are not supported.
+
+### License
+This project is licensed under the MIT License.
+
+### Contributions
+Contributions are welcome! Please open issues or submit pull requests for improvements and bug fixes.
