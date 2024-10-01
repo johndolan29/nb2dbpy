@@ -3,6 +3,7 @@ import json
 import sys
 from os import path
 from nb2dbpy.converters import nb2py, py2nb
+from nb2dbpy.utils import get_available_filename
 
 
 def convert(in_file, out_file=None):
@@ -65,19 +66,7 @@ def main():
             out_file = in_file.replace(".py", ".ipynb")
 
     # Check if the output file already exists, ask for confirmation to overwrite
-    if path.exists(out_file):
-        print(f"Warning: File '{out_file}' already exists.")
-        while True:
-            response = (
-                input("Do you want to overwrite it? (y/n): ").strip().lower()
-            )
-            if response in ("y", "yes"):
-                break
-            elif response in ("n", "no"):
-                print("Exiting without overwriting the file.")
-                sys.exit(0)
-            else:
-                print("Invalid response. Please enter 'y' or 'n'.")
+    out_file = get_available_filename(out_file)
 
     try:
         convert(in_file, out_file)

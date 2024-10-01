@@ -45,14 +45,8 @@ You can specify a custom output file name using the -o or --output option:
 nb2dbpy input_file.py -o custom_output.ipynb
 ```
 
-#### Overwriting Existing Files
-If the output file already exists, the tool will prompt you before overwriting:
-
-```
-Warning: File <output file> already exists.
-Do you want to overwrite it? (y/n):
-Enter y to overwrite or n to cancel the operation.
-```
+#### Dealing with Existing Files
+If the output file already exists, the tool will find the next available filename, for example, if you already have created test.py from test.ipynb, the tool with next create test(1).py to protect against overwriting. 
 
 ## Examples
 #### Example 1: Converting a Databricks Script to a Notebook
